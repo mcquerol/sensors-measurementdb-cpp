@@ -21,12 +21,12 @@ public:
 	Measurement(uint16_t timestamp);
 	virtual ~Measurement();
 
-	uint16_t toTimestap(int hour, int minute);
-	std::string toTimeOfDay(uint16_t timestamp);
+	static uint16_t toTimestap(int hour, int minute);
+	static std::string toTimeOfDay(uint16_t timestamp);
 
 	long getTimestamp() const;
-	virtual std::string toString() const;
-	void parseLine(const std::string& line, uint16_t timestamp, std::string& type, std::string& remainder);
+	virtual std::string toString() = 0;
+	static void parseLine(const std::string& line, uint16_t timestamp, std::string& type, std::string& remainder);
 
 };
 
