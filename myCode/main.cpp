@@ -7,11 +7,9 @@ using namespace std;
 
 int main ()
 {
-	cout << "test" << endl;
 
-	Temperature temp(200, 30);
-
-	cout << temp.toString() << endl;
+	Temperature Measurement1(Measurement::toTimestap(6,0), -3);
+	cout << Measurement1.toString() << endl;
 
 	return 0;
 }
