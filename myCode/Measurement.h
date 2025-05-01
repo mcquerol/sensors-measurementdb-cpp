@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <ostream>
 
 class Measurement
 {
@@ -29,5 +30,7 @@ public:
 	static void parseLine(const std::string& line, uint16_t timestamp, std::string& type, std::string& remainder);
 
 };
+
+std::ostream& operator<<(std::ostream& lhs, Measurement& rhs);
 
 #endif /* MEASUREMENT_H_ */
