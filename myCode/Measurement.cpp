@@ -63,3 +63,8 @@ void Measurement::parseLine(const std::string &line, uint16_t timestamp,std::str
 {
 
 }
+
+std::ostream& operator <<(std::ostream &lhs, Measurement &rhs)
+{
+	return lhs << rhs.toTimeOfDay(rhs.getTimestamp()) << ' ' << rhs.toString() << endl;
+}
