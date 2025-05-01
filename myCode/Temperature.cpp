@@ -7,9 +7,30 @@
 
 #include "Temperature.h"
 
-Temperature::Temperature()
-{
-	// TODO Auto-generated constructor stub
+using namespace std;
 
+Temperature::Temperature(uint16_t timestamp, float temperature) : Measurement{timestamp}, temperature{temperature}
+{
 }
 
+float Temperature::getTemperature()
+{
+	return temperature;
+}
+
+std::string Temperature::toString()
+{
+	return "Temperature: " + std::to_string(temperature) + " *C";
+}
+
+std::shared_ptr<Temperature> Temperature::fromString(uint16_t timestamp, std::string value)
+{
+	shared_ptr<Temperature> ptr; //placeholder
+	return ptr;
+}
+
+Temperature* Temperature::toType(Measurement *ptr)
+{
+	Temperature* temp; //placeholder
+	return temp;
+}
