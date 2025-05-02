@@ -28,6 +28,14 @@ int main ()
 	ofstream fileOut("data.txt");
 	db.save(fileOut);
 	fileOut.close();
+	cout << endl;
+	//reading file
+	MeasurementDb db2;
+	ifstream fileIn("data.txt");
+	db2.load(fileIn);
+	fileIn.close();
+	cout << "Database 2 - data.txt contents" << endl;
+	db2.print();
 
 	return 0;
 }
