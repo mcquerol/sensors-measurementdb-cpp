@@ -6,6 +6,9 @@
  */
 
 #include "MeasurementDb.h"
+#include "Temperature.h"
+#include "Humidity.h"
+
 #include <iostream>
 
 using namespace std;
@@ -52,6 +55,37 @@ void MeasurementDb::save(std::ostream &to)
 
 void MeasurementDb::load(std::istream &from)
 {
+
+	data.clear(); //clear the map containing all data
+	string line;
+	uint16_t timestamp;
+	string type;
+	string remainder;
+	string location;
+
+	shared_ptr<Measurement> ptr;
+	while (getline(from, line))
+	{
+		if(line[0] == '[' && line[line.size() - 1] == ']') //location
+		{
+			line.erase(0, 1); //remove [
+			line.erase(line.end() - 1); //remove ]
+			location = line;
+		}
+		else
+		{
+			Measurement::parseLine(line, timestamp, type, remainder);
+			if(type == "Temperature")
+			{
+				ptr = Temperature::fromString(timestamp, remainder);
+			}
+			else
+			{
+				ptr = Humidity::fromString(timestamp, remainder);
+			}
+			addMeasurements(location, ptr);
+		}
+	}
 }
 
 bool MeasurementDb::maximumTemperature(std::string &location, std::shared_ptr<Measurement> &measurement)
