@@ -90,5 +90,26 @@ void MeasurementDb::load(std::istream &from)
 
 bool MeasurementDb::maximumTemperature(std::string &location, std::shared_ptr<Measurement> &measurement)
 {
-	return false;
+	bool found = false;
+	float maxTemp = 0.0f;
+
+	for(const auto& x : data)
+	{
+		for(const auto& vec : x.second)
+		{
+			auto temp = Temperature::toType(vec.get());
+			if(temp != nullptr)
+			{
+				float t = temp->getTemperature();
+				if(t > maxTemp)
+				{
+					found = true;
+					maxTemp = t;
+					measurement = vec;
+					location = x.first;
+				}
+			}
+		}
+	}
+	return found;
 }
