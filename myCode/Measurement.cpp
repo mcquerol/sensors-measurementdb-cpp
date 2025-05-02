@@ -8,6 +8,8 @@
 #include "Measurement.h"
 
 #include <iostream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -59,12 +61,31 @@ long Measurement::getTimestamp() const
 	return timestamp;
 }
 
-void Measurement::parseLine(const std::string &line, uint16_t timestamp,std::string &type, std::string &remainder)
+void Measurement::parseLine(const std::string& line, uint16_t& timestamp, std::string& type, std::string& remainder)
 {
+    std::istringstream iss(line);
+    std::string temp;
 
+    // Get timestamp
+    std::getline(iss, temp, ';');
+    timestamp = static_cast<uint16_t>(std::atol(temp.c_str()));
+
+    // Get "Humidity: 80.000000%"
+    std::getline(iss, temp);
+
+    // Now split that into type and remainder
+    std::istringstream restStream(temp);
+    std::getline(restStream, type, ':');
+    std::getline(restStream, remainder);
+
+    // Optional: trim leading space from remainder
+    if (!remainder.empty() && remainder[0] == ' ')
+    {
+        remainder.erase(0, 1);
+    }
 }
 
-std::ostream& operator <<(std::ostream &lhs, Measurement &rhs)
+std::ostream& operator <<(std::ostream& lhs, Measurement& rhs)
 {
 	return lhs << rhs.toTimeOfDay(rhs.getTimestamp()) << ' ' << rhs.toString() << endl;
 }
