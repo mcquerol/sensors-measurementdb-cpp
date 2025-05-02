@@ -37,5 +37,13 @@ int main ()
 	cout << "Database 2 - data.txt contents" << endl;
 	db2.print();
 
+	//testing the maximum temperature of
+	string testLocation;
+	shared_ptr<Measurement> testPtr;
+	if(db.maximumTemperature(testLocation, testPtr))
+	{
+		cout << "Max temperature: " << testLocation << ' ' << testPtr->toTimeOfDay(testPtr->getTimestamp()) << ' ' << testPtr->toString() << endl;
+	}
+
 	return 0;
 }
