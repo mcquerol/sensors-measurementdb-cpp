@@ -27,7 +27,7 @@ public:
 
 	long getTimestamp() const;
 	virtual std::string toString() = 0;
-	static void parseLine(const std::string& line, uint16_t timestamp, std::string& type, std::string& remainder);
+	static void parseLine(const std::string& line, uint16_t& timestamp, std::string& type, std::string& remainder);
 
 };
 
