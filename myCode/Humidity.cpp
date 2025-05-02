@@ -25,8 +25,7 @@ std::string Humidity::toString()
 
 std::shared_ptr<Humidity> Humidity::fromString(uint16_t timestamp, std::string value)
 {
-	shared_ptr<Humidity> ptr; //placeholder
-	return ptr;
+	return make_shared<Humidity>(timestamp, stof(value));
 }
 
 Humidity* Humidity::toType(Measurement *ptr)

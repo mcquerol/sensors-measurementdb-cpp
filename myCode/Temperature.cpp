@@ -25,8 +25,7 @@ std::string Temperature::toString()
 
 std::shared_ptr<Temperature> Temperature::fromString(uint16_t timestamp, std::string value)
 {
-	shared_ptr<Temperature> ptr; //placeholder
-	return ptr;
+	return make_shared<Temperature>(timestamp, stof(value));
 }
 
 Temperature* Temperature::toType(Measurement *ptr)
