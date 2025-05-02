@@ -40,6 +40,14 @@ void MeasurementDb::print() const
 
 void MeasurementDb::save(std::ostream &to)
 {
+	for(const auto& measurements : data)
+	{
+		to << '[' << measurements.first << ']' << "\n";
+		for(const auto& vec : measurements.second)
+		{
+			to << vec.get()->getTimestamp() << ';' << vec.get()->toString() << "\n";
+		}
+	}
 }
 
 void MeasurementDb::load(std::istream &from)
