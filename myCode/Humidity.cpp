@@ -6,6 +6,7 @@
  */
 
 #include "Humidity.h"
+#include "Measurement.h"
 
 using namespace std;
 
@@ -30,6 +31,5 @@ std::shared_ptr<Humidity> Humidity::fromString(uint16_t timestamp, std::string v
 
 Humidity* Humidity::toType(Measurement *ptr)
 {
-	Humidity* temp; //placeholder
-	return temp;
+	return dynamic_cast<Humidity*>(ptr);
 }

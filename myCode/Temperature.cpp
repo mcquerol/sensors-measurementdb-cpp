@@ -30,6 +30,5 @@ std::shared_ptr<Temperature> Temperature::fromString(uint16_t timestamp, std::st
 
 Temperature* Temperature::toType(Measurement *ptr)
 {
-	Temperature* temp; //placeholder
-	return temp;
+	return dynamic_cast<Temperature*>(ptr);
 }
